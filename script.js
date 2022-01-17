@@ -9,11 +9,12 @@ var lowercase;
 var uppercase;
 var numeric;
 var special;
-var selectionArr;
+var resultArr;
 var result="";
-var temp1;
-var temp2;
-var temp3;
+var rand;
+var targetArr;
+var checkArr;
+var isFirstClick = true;
 
 // Write password to the #password input
 function writePassword() {
@@ -25,24 +26,29 @@ function writePassword() {
 }
 
 function generatePassword() {
-  userChoice();
-  passwordArray();
-  characterSelection();
+  if (isFirstClick) {
+    userChoice();
+    passwordArray();
+    characterSelection();
+    isFirstClick = false;
+    console.log(isFirstClick);
+  } else {
+      characterSelection();
+  };
 }
+
 //This function collects user's input on length and character selection criteria and write to five variables, length, lowercase, uppercase, numeric, and special, respectively
 function userChoice(){
   var isFirstRun = true;
   do {
     length = window.prompt("Enter length (8-128)");
-    console.log(parseInt(length));
   } while (parseInt(length) < 8 || parseInt(length) > 128);
   // while (parseInt(length) < 8 || parseInt(length) > 128 || isNaN(parseInt(length)));
   do {
     if(isFirstRun) {
       charChoice();
       isFirstRun = false;
-    } 
-    else {
+    } else {
       window.alert("Please make sure you select at least one type of character for your password!");
       charChoice();
     }
@@ -79,27 +85,24 @@ function passwordArray() {
   if(special==="n"){
     specialArr="";
   }
-  selectionArr=[...lowercaseArr, ...uppercaseArr, ...numericArr, ...specialArr].filter(Boolean);
-  console.log(selectionArr);
+  resultArr=[...lowercaseArr, ...uppercaseArr, ...numericArr, ...specialArr].filter(Boolean);
 }
 
 function characterSelection() {
-//need to check if temp3 is empty now
   do {
     result="";
-    temp3 = [...selectionArr];
+    checkArr = [...resultArr];
     for(var i=0; i<length; i++){
-      temp1 = Math.floor(Math.random()*selectionArr.length);
-      console.log(selectionArr[temp1]);
-      temp2 = selectionArr[temp1];
-      result += temp2.charAt(Math.floor(Math.random()*temp2.length));
-      temp3[temp1] = "";
-      console.log("selectionArr: " + selectionArr);
-      console.log("result is: " + result + " temp3: " + temp3);
+      rand = Math.floor(Math.random()*resultArr.length);
+      targetArr = resultArr[rand];
+      result += targetArr.charAt(Math.floor(Math.random()*targetArr.length));
+      checkArr[rand] = "";
     };
-    console.log("temp3.filter(Boolean).length: " + temp3.length);
-  } while (temp3.filter(Boolean).length !== 0);
+  } while (checkArr.filter(Boolean).length !== 0);
 }
+
+//reset all the variables to default value so user can generate multiple passwords by clicking on the button
+
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
