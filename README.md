@@ -31,5 +31,7 @@ The user can also click the "Generate Password" button again to get another pass
 ![](./assets/image/result2.PNG)
 
 ------
+## GitHub Repository
+https://github.com/banbanleelee/RandomPasswordGenerator
 ## Deployed Application
 https://banbanleelee.github.io/RandomPasswordGenerator/
