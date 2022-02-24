@@ -1,4 +1,4 @@
-# RandomPasswordGenerator
+# Random Password Generator
 
 ## Overview
 This project is a random password generator. User can choose a length from 8 to 128, and include 1 to 4 different characters, including lowercase, uppercase, numeric, and special ones.
